@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    # We'll add more here soon...
+
+  # Backend Service
+  backend:
+    build: ./backend
+    # This is where we will pass your MONGODB_URL dynamically
+    
+  # Frontend Service
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
