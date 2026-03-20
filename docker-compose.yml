@@ -3,15 +3,27 @@ version: '3.8'
 services:
   mongodb:
     image: mongo:latest
-    # We'll add more here soon...
+    container_name: mongodb
+    ports:
+      - "27017:27017"
 
   # Backend Service
   backend:
-    build: ./backend
-    # This is where we will pass your MONGODB_URL dynamically
-    
+    build: ./backend-repo/backend
+    container_name: backend
+    ports:
+      - "5000:5000"
+    # Uses the ENV from your Dockerfile, or we can override here:
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017
+    depends_on:
+      - mongodb
+
   # Frontend Service
   frontend:
-    build: ./frontend
+    build: ./frontend-repo/frontend
+    container_name: frontend
     ports:
-      - "80:80"
+      - "8080:80"
+    depends_on:
+      - backend
