@@ -24,6 +24,6 @@ services:
     build: ./frontend-repo/frontend
     container_name: frontend
     ports:
-      - "4545:80"
+      - "4545:3000"
     depends_on:
       - backend
