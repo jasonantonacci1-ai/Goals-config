@@ -7,19 +7,19 @@ services:
     ports:
       - "27017:27017"
 
-  # Backend Service
+    # Backend Service
   backend:
     build: ./backend-repo/backend
     container_name: backend
     ports:
       - "5000:5000"
-    # Uses the ENV from your Dockerfile, or we can override here:
+    # Uses the ENV from Dockerfile
     environment:
       - MONGODB_URL=mongodb://mongodb:27017
     depends_on:
       - mongodb
 
-  # Frontend Service
+    # Frontend Service
   frontend:
     build: ./frontend-repo/frontend
     container_name: frontend
